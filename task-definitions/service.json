@@ -1,17 +1,17 @@
 [
     {
-        "name": "jenkins",
-        "image": "jenkins",
+        "name": "users-microservice",
+        "image": "575108929474.dkr.ecr.us-east-1.amazonaws.com/demo-ecs-cluster-ecr-repo:latest",
         "portMappings": [
             {
-                "containerPort": 8080,
+                "containerPort": 8081,
                 "protocol": "tcp"
             }
         ],
         "environment": [
             {
-                "name": "JAVA_OPTS",
-                "value": "-Xmx1024m -Xms512m"
+                "name": "spring.profiles.active",
+                "value": "dev"
             }
         ],
         "cpu": 512,
