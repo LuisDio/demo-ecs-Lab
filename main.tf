@@ -18,10 +18,6 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_ecr_repository" "name" {
-  name = "${var.cluster_name}-ecr-repo"
-}
-
 module "vpc" {
   source               = "./modules/vpc"
   vpc_cidr             = var.vpc_cidr
@@ -33,14 +29,13 @@ module "vpc" {
 }
 
 module "ecs" {
-  source        = "./modules/ecs"
-  cluster_name  = var.cluster_name
-  family        = "users-microservice-task-definition"
-  task_def_file = file("task-definitions/service.json")
-  cpu           = "512"
-  memory        = "1024"
-  vpc_id        = module.vpc.vpc_id
-  # private_subnet_cidrs = var.private_subnet_cidrs
+  source            = "./modules/ecs"
+  cluster_name      = var.cluster_name
+  family            = "users-microservice-task-definition"
+  task_def_file     = file("task-definitions/service.json")
+  cpu               = "512"
+  memory            = "1024"
+  vpc_id            = module.vpc.vpc_id
   public_subnet_ids = module.vpc.public_subnet_ids
 
 }
