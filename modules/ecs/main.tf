@@ -19,6 +19,10 @@ resource "aws_ecs_task_definition" "taskdf" {
   ephemeral_storage {
     size_in_gib = 21
   }
+  lifecycle {
+    ignore_changes = [container_definitions]
+  }
+
   tags = {
     Name = "${var.cluster_name}-task-definition"
   }
